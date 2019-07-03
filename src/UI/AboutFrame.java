@@ -1,5 +1,7 @@
 package UI;
 
+import Logic.Static;
+
 public class AboutFrame extends javax.swing.JFrame {
 
     public AboutFrame() {
@@ -8,6 +10,8 @@ public class AboutFrame extends javax.swing.JFrame {
     }
 
     private void settings() {
+        //Sets program title and version to state bar.
+        this.setTitle(Static.title + " " + Static.version);
         //centrates the frame
         this.setLocationRelativeTo(null);
         //deploys the frame

@@ -1,6 +1,7 @@
 package UI;
 
 import Logic.Run;
+import Logic.Static;
 
 public class SettingsFrame extends javax.swing.JFrame {
 
@@ -10,6 +11,8 @@ public class SettingsFrame extends javax.swing.JFrame {
     }
 
     private void settings() {
+        //Sets program title and version to state bar.
+        this.setTitle(Static.title + " " + Static.version);
         //centrates the frame
         this.setLocationRelativeTo(null);
         //deploys the frame

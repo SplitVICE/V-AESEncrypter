@@ -52,8 +52,27 @@ public class AES {
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
+//            System.out.println("Error while decrypting: " + e.toString());
+            return e.toString();
         }
-        return null;
     }
+
+    //It true, the key password is incorrect.
+    public boolean is_key_password_correct(String output_string_gave) {
+        if (output_string_gave.contains("BadPadding")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //If the text is not AES syntax.
+    public boolean is_the_text_AES(String output_string_gave) {
+        if (output_string_gave.contains("Illegal")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
