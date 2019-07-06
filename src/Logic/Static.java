@@ -1,6 +1,10 @@
 package Logic;
 
 //import java.awt.Image;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+
 //import java.awt.Toolkit;
 public class Static {
 
@@ -17,7 +21,7 @@ public class Static {
     //Data static object to save and load info.
     public static Data data = new Data();
 
-//    public static Image getIconImage() {
-//        return Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("IMG/iconLogov2.png"));
-//    }
+    public static Image getIconImage() {
+        return Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("IMG/iconLogov2.png"));
+    }
 }

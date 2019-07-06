@@ -1,40 +1,32 @@
 package UI;
 
 import Logic.Static;
+import java.awt.Color;
 
-public class AlertFrame extends javax.swing.JFrame implements Runnable {
-    //This frame is used to display quick simple messages.
+public class IntroLogoFrame extends javax.swing.JFrame implements Runnable {
 
-    //Requires a message to display.
-    public AlertFrame(String message) {
+    public IntroLogoFrame() {
         //Sets the icon image to the status bar and windows status bar
         setIconImage(Static.getIconImage());
-        //Makes the status bar disapear.
-        this.setUndecorated(true);
+        //Deletes the status bar.
+        setUndecorated(true);
         initComponents();
-        //The message is placed inside the jlabel
-        this.jLabel1_message.setText(message);
-        settings();
-    }
-
-    private void settings() {
+        //Makes the frame transparent
+        setBackground(new Color(0, 0, 0, 0));
         //centrates the frame
         this.setLocationRelativeTo(null);
-        //deploys the frame
-        this.setVisible(true);
-        //Thread
-        Thread t = new Thread(this);
-        t.start();
     }
 
     @Override
     public void run() {
         try {
-            //Closes the frame after the given time.
-            Thread.sleep(400);
+            //makes the frame visible
+            this.setVisible(true);
+            //Sleeps for 0.8 seconds
+            Thread.sleep(800);
+            //closes the frame
             this.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -42,28 +34,27 @@ public class AlertFrame extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1_message = new javax.swing.JLabel();
+        jLabel1_logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1_message.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1_message.setText("message");
+        jLabel1_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/program_logo_t.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1_message)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1_logo)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1_message)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1_logo)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -71,6 +62,7 @@ public class AlertFrame extends javax.swing.JFrame implements Runnable {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1_message;
+    private javax.swing.JLabel jLabel1_logo;
     // End of variables declaration//GEN-END:variables
+
 }

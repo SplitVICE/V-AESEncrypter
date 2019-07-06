@@ -57,7 +57,7 @@ public class AES {
         }
     }
 
-    //It true, the key password is incorrect.
+    //If true, the key password is correct.
     public boolean is_key_password_correct(String output_string_gave) {
         if (output_string_gave.contains("BadPadding")) {
             return false;
@@ -66,7 +66,7 @@ public class AES {
         }
     }
 
-    //If the text is not AES syntax.
+    //If the text is or is not AES syntax.
     public boolean is_the_text_AES(String output_string_gave) {
         if (output_string_gave.contains("Illegal")) {
             return false;

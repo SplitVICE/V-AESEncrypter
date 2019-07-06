@@ -3,7 +3,10 @@ package UI;
 import Logic.Run;
 import Logic.Static;
 import Objects.AES;
+import Objects.Textkeeper;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -11,6 +14,8 @@ public class MainFrame extends javax.swing.JFrame {
     private AES aes = new AES();
 
     public MainFrame() {
+        //Sets the icon image to the status bar and windows status bar
+        setIconImage(Static.getIconImage());
         initComponents();
         settings();
     }
@@ -22,15 +27,20 @@ public class MainFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         //deploys the frame
         this.setVisible(true);
+        //Prevents the window to be resizable
+        this.setResizable(false);
         //by default, the encrypt combobox will be always selected.
         jRadioButton1_encrypt.setSelected(true);
         //The status label gets cleaned
         label_status_change("", "black");
         //Settings of the panels
         panels_settings();
+        buttons_settings();
+        //the field of key password request focus to immediately type there
+        jTextField1_password.requestFocus();
     }
 
-    // <editor-fold desc="Buttons to frames and initComponents">
+    // <editor-fold desc="Frame buttons and listeners. initComponents method">
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,13 +65,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 208, 255));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Password key:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("V-AESEncrypter");
 
-        jTextField1_password.setText("vice");
         jTextField1_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1_passwordKeyTyped(evt);
@@ -91,7 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea_panel2);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Output");
+        jLabel3.setText("Text output");
 
         jLabel4_status.setText("STATUS LOREM IPSUM IS A DUMMY TEXT TO FILL EMPTY SPACES");
 
@@ -111,14 +122,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2_settings.setText("Settings");
+        jButton2_settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/gear_settings_img.png"))); // NOI18N
         jButton2_settings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2_settingsActionPerformed(evt);
             }
         });
 
-        jButton3_about.setText("About");
+        jButton3_about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/about_button_image.png"))); // NOI18N
         jButton3_about.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3_aboutActionPerformed(evt);
@@ -131,46 +142,48 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jButton1_copy_to_clipboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton1_encrypt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton2_unencrypt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3_about)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4_status, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
+                        .addComponent(jLabel4_status, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1_password)))
-                .addContainerGap())
+                        .addComponent(jTextField1_password))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3_about, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))
+                    .addComponent(jButton1_copy_to_clipboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel3))
+                    .addComponent(jScrollPane2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
+                    .addComponent(jButton3_about)
+                    .addComponent(jButton2_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1_encrypt)
                     .addComponent(jRadioButton2_unencrypt)
-                    .addComponent(jButton2_settings)
-                    .addComponent(jButton3_about)
                     .addComponent(jLabel4_status))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,25 +204,28 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2_settingsActionPerformed
+        //Saves the content of panels and key password fields.
+        save_panel_1_and_2_and_keyPassword_content();
         //Opens settings frame
         SettingsFrame settingsFrame = new SettingsFrame();
         this.dispose();
     }//GEN-LAST:event_jButton2_settingsActionPerformed
 
     private void jButton3_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_aboutActionPerformed
+        //Saves the content of panels and key password fields.
+        save_panel_1_and_2_and_keyPassword_content();
         //Opens about frame.
         AboutFrame aboutFrame = new AboutFrame();
         this.dispose();
     }//GEN-LAST:event_jButton3_aboutActionPerformed
 
-    // </editor-fold>
 
     private void jButton1_copy_to_clipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_copy_to_clipboardActionPerformed
         //if there are text inside the panel 2, it will be copied to clipboard.
@@ -221,8 +237,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1_copy_to_clipboardActionPerformed
 
-    //LISTENS TO ALL THE KEYBOARD TYPES THE USER DOES AT THE PANEL 1.
     private void jTextArea_panel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_panel1KeyReleased
+        //LISTENS TO ALL THE KEYBOARD TYPES THE USER DOES AT THE PANEL 1.
         panels_engine();
     }//GEN-LAST:event_jTextArea_panel1KeyReleased
 
@@ -237,6 +253,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTextField1_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1_passwordKeyTyped
         panels_engine();
     }//GEN-LAST:event_jTextField1_passwordKeyTyped
+
+    // </editor-fold>
+    
+    // <editor-fold desc="Logic methods">
+    //Settings of the buttons "Settings" and "About"
+    private void buttons_settings() {
+        jButton3_about.setOpaque(false);
+        jButton3_about.setContentAreaFilled(false);
+        jButton3_about.setBorderPainted(false);
+
+        jButton2_settings.setOpaque(false);
+        jButton2_settings.setContentAreaFilled(false);
+        jButton2_settings.setBorderPainted(false);
+    }
 
     //Method that performs all the transfer of the text of the panels
     private void panels_engine() {
@@ -286,31 +316,53 @@ public class MainFrame extends javax.swing.JFrame {
     //Method that gives if the syntax written inside panel 1 is correct
     //or if the keypassword is incorrect
     private boolean is_there_a_AES_error(String panel1_output_string) {
-        System.out.println("output: " + panel1_output_string);
-        boolean status = false;        
+        //Boolean that checks if the text written down is AES text.
+        boolean is_aes_text = true;
+        //Boolean that checks if key password is correct
+        boolean is_key_password_correct = true;
+
         //is the text written down AES?
         if (this.aes.is_the_text_AES(panel1_output_string)) {
-            label_status_change("", "red");
-            jTextArea_panel2.setText("");
-            status = false;
+            is_aes_text = true;
         } else {
-            //Error label
-            label_status_change("The text given is not AES format!", "red");
-            jTextArea_panel2.setText("");
-            status = true;
+
+            is_aes_text = false;
         }
         //is key password correct?
         if (this.aes.is_key_password_correct(panel1_output_string)) {
-            label_status_change("", "red");
-            jTextArea_panel2.setText("");
-            status = false;
+            is_key_password_correct = true;
         } else {
-            //Error label
-            label_status_change("The password is incorrect!", "red");
-            jTextArea_panel2.setText("");
-            status = true;
+
+            is_key_password_correct = false;
         }
-        return status;
+
+        //if those booleans are correct, then there are not any problem. Returns
+        //false.
+        if (is_aes_text && is_key_password_correct) {
+            label_status_change("", "red");
+            return false;
+            //if there is something incorrect then...
+        } else {
+            //if the text is not aes text there will be displayed an error that
+            //says so and also the panel 2 will be cleared
+            if (!is_aes_text) {
+                //Error message
+                label_status_change("The text given is not AES format!", "red");
+                //Clears the panel 2
+                jTextArea_panel2.setText("");
+            }
+            //if the key password is not correct then there wiill be displayed
+            //an error message and also the panel 2 will be cleared
+            if (!is_key_password_correct) {
+                //Error message
+                label_status_change("The key password is incorrect!", "red");
+                //clears panel 2
+                jTextArea_panel2.setText("");
+            }
+            //at the end returns true. it means there is a error at the aes
+            //format or key password.
+            return true;
+        }
     }
 
     //If there are any text at the panel 1, it will clear the panel 2
@@ -353,7 +405,27 @@ public class MainFrame extends javax.swing.JFrame {
         //You are not supposed to be able to type at the panel two. So it will
         //be disabled to be written into
         jTextArea_panel2.setEditable(false);
+
+        //If the MainFrame is being opened after the user went to another frame
+        //The content of panels and key password field will be re-established
+        if (Textkeeper.frame_jump_performed) {
+            jTextField1_password.setText(Textkeeper.password_key_content);
+            jTextArea_panel1.setText(Textkeeper.panel_1_content);
+            jTextArea_panel2.setText(Textkeeper.panel_2_content);
+        }
     }
+
+    //Sets the content inside the panels and the key password field into
+    //variables at the Textkeeper class. In order to fill the panels and the
+    //key password field with the same info they had before changing the frame.
+    private void save_panel_1_and_2_and_keyPassword_content() {
+        Textkeeper.panel_1_content = jTextArea_panel1.getText();
+        Textkeeper.panel_2_content = jTextArea_panel2.getText();
+        Textkeeper.password_key_content = jTextField1_password.getText();
+        Textkeeper.frame_jump_performed = true;
+    }
+
+// </editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
