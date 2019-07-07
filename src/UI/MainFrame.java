@@ -5,13 +5,13 @@ import Logic.Static;
 import Objects.AES;
 import Objects.Textkeeper;
 import java.awt.Color;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 
 public class MainFrame extends javax.swing.JFrame {
 
     //Aes object to use inside the class to morp the text.
     private AES aes = new AES();
+    //Counter to MacGunFrame
+    private int mac_gun_counter = 0;
 
     public MainFrame() {
         //Sets the icon image to the status bar and windows status bar
@@ -62,6 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1_copy_to_clipboard = new javax.swing.JButton();
         jButton2_settings = new javax.swing.JButton();
         jButton3_about = new javax.swing.JButton();
+        jLabel_mac = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +137,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel_mac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_macMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,6 +162,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jTextField1_password))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_mac, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,7 +184,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jButton3_about)
-                    .addComponent(jButton2_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_mac, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -218,14 +228,6 @@ public class MainFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2_settingsActionPerformed
 
-    private void jButton3_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_aboutActionPerformed
-        //Saves the content of panels and key password fields.
-        save_panel_1_and_2_and_keyPassword_content();
-        //Opens about frame.
-        AboutFrame aboutFrame = new AboutFrame();
-        this.dispose();
-    }//GEN-LAST:event_jButton3_aboutActionPerformed
-
 
     private void jButton1_copy_to_clipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_copy_to_clipboardActionPerformed
         //if there are text inside the panel 2, it will be copied to clipboard.
@@ -254,8 +256,28 @@ public class MainFrame extends javax.swing.JFrame {
         panels_engine();
     }//GEN-LAST:event_jTextField1_passwordKeyTyped
 
+    private void jLabel_macMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_macMouseClicked
+        //increases the counter when you click the invisible jlabel
+        this.mac_gun_counter++;
+        //if the macguncounter is 7 the frame will be displayed.
+        if (this.mac_gun_counter >= 3) {
+            //Saves the content of panels and key password fields.
+            save_panel_1_and_2_and_keyPassword_content();
+            //Opens MacGun frame
+            MacGunFrame mgf = new MacGunFrame();
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel_macMouseClicked
+
+    private void jButton3_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_aboutActionPerformed
+        //Saves the content of panels and key password fields.
+        save_panel_1_and_2_and_keyPassword_content();
+        //Opens about frame
+        AboutFrame aboutFrame = new AboutFrame();
+        this.dispose();
+    }//GEN-LAST:event_jButton3_aboutActionPerformed
+
     // </editor-fold>
-    
     // <editor-fold desc="Logic methods">
     //Settings of the buttons "Settings" and "About"
     private void buttons_settings() {
@@ -436,6 +458,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4_status;
+    private javax.swing.JLabel jLabel_mac;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1_encrypt;
     private javax.swing.JRadioButton jRadioButton2_unencrypt;

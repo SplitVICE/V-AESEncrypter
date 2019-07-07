@@ -1,5 +1,7 @@
 package Logic;
 
+import UI.*;
+
 public class Main {
 
     //PROGRAM MADE BY VICE.
