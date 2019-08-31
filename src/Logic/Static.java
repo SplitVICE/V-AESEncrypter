@@ -17,7 +17,7 @@ public class Static {
     //Path to the program folder data.
     public static String DataFolderPath = System.getenv("APPDATA") + "\\" + globalFolderForData + "\\" + folderForDataName;
     //Program title and version to display and to keep record.
-    public static String title = "V-AESEncrypter", version = "1.0";
+    public static String title = "V-AESEncrypter", version = "1.1";
     //Data static object to save and load info.
     public static Data data = new Data();
 

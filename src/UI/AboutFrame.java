@@ -5,6 +5,7 @@ import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,15 +20,6 @@ public class AboutFrame extends javax.swing.JFrame {
         setIconImage(Static.getIconImage());
         initComponents();
         settings();
-        resize_img_logo();
-    }
-    
-    private void resize_img_logo() {
-        ImageIcon myImage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../IMG/program_logo_t.png")));
-        Image img1 = myImage.getImage();
-        Image img2 = img1.getScaledInstance(jLabel_logo.getWidth(), jLabel_logo.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon i = new ImageIcon(img2);
-        jLabel_logo.setIcon(i);
     }
 
     private void settings() {
@@ -63,6 +55,9 @@ public class AboutFrame extends javax.swing.JFrame {
                 jButton1_backActionPerformed(evt);
             }
         });
+
+        jLabel_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/program_logo_t_about_img.png"))); // NOI18N
+        jLabel_logo.setVerifyInputWhenFocusTarget(false);
 
         jLabel1.setFont(new java.awt.Font("Bernard MT Condensed", 1, 18)); // NOI18N
         jLabel1.setText("Program made by VICE.");
@@ -145,14 +140,23 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     //Opens a link on the internet browser
-    private void open_link(String link){
-    if (Desktop.isDesktopSupported()) {
+    private void open_link(String link) {
+        if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI(link));
             } catch (URISyntaxException | IOException ex) {
                 Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    //This code is disposed at version 1.1 . Due to errors showing the img.
+    private void resize_img_logo() {
+        ImageIcon myImage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../IMG/program_logo_t.png")));
+        Image img1 = myImage.getImage();
+        Image img2 = img1.getScaledInstance(jLabel_logo.getWidth(), jLabel_logo.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i = new ImageIcon(img2);
+        jLabel_logo.setIcon(i);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
