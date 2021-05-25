@@ -136,7 +136,7 @@ public class AboutFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1_backActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        open_link("https://justvice.github.io/links/");
+        open_link("http://splitvice.github.io/links/");
     }//GEN-LAST:event_jLabel3MouseClicked
 
     //Opens a link on the internet browser
